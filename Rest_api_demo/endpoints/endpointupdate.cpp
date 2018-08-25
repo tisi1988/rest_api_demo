@@ -31,6 +31,10 @@ void EndpointUpdate::handlePut(http_request request) noexcept {
     try {
         qInfo() << QString("Received Update request from IP: %1")
                    .arg(QString::fromStdString(request.remote_address()));
+        QString content_type = QString::fromStdString(request.headers().content_type());
+        if(content_type != "application/json") {
+            throw CustomException(QString("Invalid content type %1").arg(content_type));
+        }
         Content content_to_update = parseUpdateRequestBody(request.extract_json().get());
         // Store the requet for later response
         put_requests_.insert(request_id_, request);
