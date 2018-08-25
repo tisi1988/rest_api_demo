@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$class_delete_request_event.html" title="The DeleteRequestEvent class declares the message to notify a new Delete request. ..." alt="" coords="149,5,291,32"/>
+<area shape="rect" id="node3" href="$class_get_decrypt_data_request_event.html" title="The GetDecryptDataRequestEvent class declares the message to notify a new request to get some content..." alt="" coords="120,56,320,83"/>
+<area shape="rect" id="node4" href="$class_register_request_event.html" title="The RegisterRequestEvent class declares the message to notify a new Register request. " alt="" coords="143,107,297,133"/>
+<area shape="rect" id="node5" href="$class_update_request_event.html" title="The UpdateRequestEvent class declares the message to notify a new Update request. ..." alt="" coords="147,157,293,184"/>
+<area shape="rect" id="node6" href="$class_view_request_event.html" title="The ViewRequestEvent class declares the message to notify a new View request. " alt="" coords="153,208,287,235"/>
+</map>

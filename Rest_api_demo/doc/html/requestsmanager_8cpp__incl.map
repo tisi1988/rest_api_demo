@@ -1,0 +1,6 @@
+<map id="requestsmanager.cpp" name="requestsmanager.cpp">
+<area shape="rect" id="node2" href="$requestsmanager_8h.html" title="Requests Manager class declaration. " alt="" coords="738,80,871,107"/>
+<area shape="rect" id="node16" href="$customexception_8h.html" title="Custom Exception class declaration. " alt="" coords="1208,80,1340,107"/>
+<area shape="rect" id="node8" href="$dbcontroller_8h.html" title="Database Controller class declaration. " alt="" coords="587,155,687,181"/>
+<area shape="rect" id="node14" href="$requestevents_8h.html" title="Requests events declaration. These events are used by the endpoints to notify the application the req..." alt="" coords="447,155,562,181"/>
+</map>
