@@ -1,3 +1,10 @@
+/**
+ * @file   device.cpp
+ * @author Rubén Sánchez Castellano
+ * @date   August 24, 2018
+ * @brief  Device class definition.
+ */
+
 #include "device.h"
 
 Device::Device() :

@@ -1,3 +1,10 @@
+/**
+ * @file   endpointregister.cpp
+ * @author Rubén Sánchez Castellano
+ * @date   August 24, 2018
+ * @brief  EndpointRegister class definition.
+ */
+
 #include "endpointregister.h"
 #include "../requestevents.h"
 #include "../customexception.h"
@@ -6,6 +13,7 @@ EndpointRegister::EndpointRegister(QObject* controlProcess, quint16 ws_port) :
     ServerEndPoint(controlProcess, QString("http://0.0.0.0:%1/register").arg(ws_port).toStdString().c_str()) {
     webservice_.support(methods::PUT, std::bind(&EndpointRegister::handlePut, this, std::placeholders::_1));
     webservice_.open().then([=] (pplx::task<void> previous_task) mutable {
+        // Error handling on open
         if (previous_task._GetImpl()->_HasUserException()) {
             try {
                 auto holder = previous_task._GetImpl()->_GetExceptionHolder(); // Probably should put in try
@@ -24,10 +32,12 @@ void EndpointRegister::handlePut(http_request request) noexcept {
         qInfo() << QString("Received Register request from IP: %1")
                    .arg(QString::fromStdString(request.remote_address()));
         Content content_to_register = parseRegisterRequestBody(request.extract_json().get());
-        put_requests_.insert(request_counter_, request);
-        RegisterRequestEvent *m = new RegisterRequestEvent(request_counter_, content_to_register);
+        // Store the requet for later response
+        put_requests_.insert(request_id_, request);
+        // Notify the application
+        RegisterRequestEvent *m = new RegisterRequestEvent(request_id_, content_to_register);
         QCoreApplication::postEvent(control_process_, m);
-        request_counter_++;
+        request_id_++;
     } catch (const CustomException &e) {
         qWarning() << "Error parsing register request's body: " << e.getMessage();
     }
@@ -36,9 +46,11 @@ void EndpointRegister::handlePut(http_request request) noexcept {
 void EndpointRegister::respondRequest(const quint64 requestId, const QString& errorMessage) {
     try {
         QMutexLocker l(&request_mutex_);
+        // Get the request to respond to from the map where is stored
         QMap<quint64, http_request>::iterator it = put_requests_.find(requestId);
         if(it != put_requests_.end()) {
             http_request request = it.value();
+            // Create the response with the JSON data
             json::value response;
             response["error"] = json::value::string(errorMessage.toStdString().c_str());
             quint16 result_code = status_codes::OK;

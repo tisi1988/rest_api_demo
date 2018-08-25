@@ -1,3 +1,10 @@
+/**
+ * @file   protectionsystem.cpp
+ * @author Rubén Sánchez Castellano
+ * @date   August 24, 2018
+ * @brief  Protection System class definition.
+ */
+
 #include "protectionsystem.h"
 
 ProtectionSystem::ProtectionSystem() :

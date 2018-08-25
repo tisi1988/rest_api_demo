@@ -1,3 +1,10 @@
+/**
+ * @file   restdemoapp.cpp
+ * @author Rubén Sánchez Castellano
+ * @date   August 24, 2018
+ * @brief  RestDemoApp class definition.
+ */
+
 #include "restdemoapp.h"
 
 RestDemoApp::RestDemoApp() : QObject(nullptr){
@@ -17,6 +24,7 @@ RestDemoApp::RestDemoApp() : QObject(nullptr){
 
     // Create DBController
     QSqlDatabase *database = new QSqlDatabase();
+    *database = QSqlDatabase::addDatabase(DBController::DB_CONNECTION_NAME);
     DBController* db_controller = new DBController(database);
 
     // Create the manager (business logic)

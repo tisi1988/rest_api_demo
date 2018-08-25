@@ -1,3 +1,10 @@
+/**
+ * @file   content.cpp
+ * @author Rubén Sánchez Castellano
+ * @date   August 24, 2018
+ * @brief  Content class definition.
+ */
+
 #include "content.h"
 
 Content::Content() :

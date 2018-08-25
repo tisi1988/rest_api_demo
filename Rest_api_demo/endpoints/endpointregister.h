@@ -6,6 +6,21 @@
  * @author Rubén Sánchez Castellano
  * @date   August 24, 2018
  * @brief  The declaration the EndpointRegister class.
+ *  The API of this endpoint is:
+ *  - URL: /register
+ *  - PARAMS: (empty)
+ *  - BODY:
+ *      + 'id' as number.
+ *      + 'protection_system_id' as number.
+ *      + 'key' as string.
+ *      + 'payload' as string.
+ *
+ * The reponse content is:
+ * - CODE:
+ *      + 200 for OK
+ *      + 400 for ERROR
+ * - BODY:
+ *      + Error message.
  */
 
 #include "serverendpoint.h"

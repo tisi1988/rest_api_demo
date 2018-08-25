@@ -1,3 +1,10 @@
+/**
+ * @file   endpointgetdecrypdata.cpp
+ * @author Rubén Sánchez Castellano
+ * @date   August 24, 2018
+ * @brief  EndpointGetDecrypData class definition.
+ */
+
 #include "endpointgetdecrypdata.h"
 #include "../requestevents.h"
 #include "../customexception.h"
@@ -6,6 +13,7 @@ EndpointGetDecrypData::EndpointGetDecrypData(QObject* controlProcess, quint16 ws
     ServerEndPoint(controlProcess, QString("http://0.0.0.0:%1/decryptdata").arg(ws_port).toStdString().c_str()) {
     webservice_.support(methods::GET, std::bind(&EndpointGetDecrypData::handleGet, this, std::placeholders::_1));
     webservice_.open().then([=] (pplx::task<void> previous_task) mutable {
+        // Error handling on open
         if (previous_task._GetImpl()->_HasUserException()) {
             try {
                 auto holder = previous_task._GetImpl()->_GetExceptionHolder(); // Probably should put in try
@@ -25,10 +33,12 @@ void EndpointGetDecrypData::handleGet(http_request request) noexcept {
                    .arg(QString::fromStdString(request.remote_address()));
         qint64 deviceId = -1, contentId = -1;
         parseGetDecryptDataRequestParams(uri::split_query(request.request_uri().query()), &deviceId, &contentId);
-        get_requests_.insert(request_counter_, request);
-        GetDecryptDataRequestEvent *m = new GetDecryptDataRequestEvent(request_counter_, deviceId, contentId);
+        // Store the requet for later response
+        get_requests_.insert(request_id_, request);
+        // Notify the application
+        GetDecryptDataRequestEvent *m = new GetDecryptDataRequestEvent(request_id_, deviceId, contentId);
         QCoreApplication::postEvent(control_process_, m);
-        request_counter_++;
+        request_id_++;
     } catch (const CustomException &e) {
         qWarning() << "Error parsing delete request's body: " << e.getMessage();
     }
@@ -37,16 +47,17 @@ void EndpointGetDecrypData::handleGet(http_request request) noexcept {
 void EndpointGetDecrypData::respondRequest(const quint64 requestId, const QString& errorMessage, const QByteArray& data) {
     try {
         QMutexLocker l(&request_mutex_);
+        // Get the request to respond to from the map where is stored
         QMap<quint64, http_request>::iterator it = get_requests_.find(requestId);
         if(it != put_requests_.end()) {
             http_request request = it.value();
+            // Create the response with the JSON data
             json::value response;
+            response["error"] = json::value::string(errorMessage.toStdString().c_str());
+            response["data"] = json::value::string(data.toStdString().c_str());
             quint16 result_code = status_codes::OK;
             if(!errorMessage.isEmpty()){
                 result_code = status_codes::BadRequest;
-                response["error"] = json::value::string(errorMessage.toStdString().c_str());
-            } else {
-                response["data"] = json::value::string(data.toStdString().c_str());
             }
             qInfo() << QString("Outgoing Json data for Get Decrypted Data %1 to %2")
                        .arg(QString::fromStdString(response.serialize()))

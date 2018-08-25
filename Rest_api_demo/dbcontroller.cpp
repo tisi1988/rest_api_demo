@@ -1,3 +1,10 @@
+/**
+ * @file   dbcontroller.cpp
+ * @author Rubén Sánchez Castellano
+ * @date   August 24, 2018
+ * @brief  DBController class definition.
+ */
+
 #include "dbcontroller.h"
 #include <QtSql/qsqlquery.h>
 #include <QtSql/qsqlerror.h>
@@ -14,16 +21,22 @@ const QString DBController::DB_TABLE_CONTENT_NAME = "Content";
 DBController::DBController(QSqlDatabase* database)
 {
     // Open the database
-    database_ = database;
-    database_->setHostName("bigblue");
-    database_->setDatabaseName(DB_FILENAME);
-    database_->setUserName(DB_USER);
-    database_->setPassword(DB_PASSWORD);
-    db_is_opened_ = database_->open();
+    if(nullptr != database){
+        database_ = database;
+        database_->setHostName("bigblue");
+        database_->setDatabaseName(DB_FILENAME);
+        database_->setUserName(DB_USER);
+        database_->setPassword(DB_PASSWORD);
+        db_is_opened_ = database_->open();
 
-    if(db_is_opened_ &&
-            (!database_->tables().contains("Devices") || !database_->tables().contains("Protection_Sytems"))){
-        insertStaticData();
+        if(db_is_opened_ &&
+                (!database_->tables().contains("Devices") || !database_->tables().contains("Protection_Sytems"))){
+            insertStaticData();
+        } else if(!db_is_opened_){
+            qWarning() << database->lastError().text();
+        }
+    } else {
+        db_is_opened_ = false;
     }
 }
 
@@ -44,11 +57,13 @@ bool DBController::registerContent(const Content& content, QString* errorMessage
         Content previous_content;
         getContent(content.getId(), &previous_content, nullptr);
         if(previous_content.getId() > -1){
+            // Content exists, return error
             if(nullptr != errorMessage) {
                 *errorMessage = "Data already inserted";
             }
             ret = false;
         } else {
+            // Content does not exist, write it
             QSqlQuery query;
             query.prepare(QString("INSERT INTO %1 (id, protection_system, key, payload) VALUES (:id, :protection_system, :key, :payload)").arg(DB_TABLE_CONTENT_NAME));
             query.bindValue(":id", content.getId());
@@ -89,9 +104,11 @@ bool DBController::updateContent(const Content& content, QString* errorMessage){
                 throw CustomException("Database is closed");
             }
         } else {
+            // Check if there is a previous content to update
             Content previous_content;
             getContent(content.getId(), &previous_content, nullptr);
             if(previous_content.getId() > -1){
+                // Content exists, so we can update it
                 QSqlQuery query;
                 query.prepare(QString("UPDATE %1 SET id=:new_id, protection_system=:new_protection_system, key=:new_key, payload=:new_payload WHERE id=%2")
                               .arg(DB_TABLE_CONTENT_NAME).arg(content.getId()));
@@ -106,6 +123,7 @@ bool DBController::updateContent(const Content& content, QString* errorMessage){
                 }
                 ret = true;
             } else {
+                // Content does not exist, return error
                 if(nullptr != errorMessage) {
                     throw CustomException("There is no such data");
                 }
@@ -130,6 +148,7 @@ bool DBController::getContent(const qint64& id, Content* content, QString* error
         } else if(nullptr == content) {
             throw CustomException("Invalid data pointer");
         } else {
+            // We are ok, so launch the query and get the data
             QSqlQuery query;
             ret = query.exec(QString("SELECT id, protection_system, key, payload FROM %1 WHERE id == %2").arg(DB_TABLE_CONTENT_NAME).arg(id));
             if(ret && query.next()) {
@@ -138,6 +157,7 @@ bool DBController::getContent(const qint64& id, Content* content, QString* error
                 content->setDecryptKey(query.value(2).toString());
                 content->setPayloadData(QByteArray::fromStdString(query.value(3).toString().toStdString()));
             } else {
+                // some error ocurred retrieving data from the database
                 if(nullptr != errorMessage) {
                     throw CustomException(database_->lastError().text());
                 }
@@ -159,6 +179,7 @@ bool DBController::getDevice(const qint64& id, Device* device, QString* errorMes
                 throw CustomException("Database is closed");
             }
         } else {
+            // We are ok, so launch the query and get the data
             QSqlQuery query;
             ret = query.exec(QString("SELECT id, name, protection_system FROM %1 WHERE id == %2").arg(DB_TABLE_DEVICES_NAME).arg(id));
             if(ret && query.next()) {
@@ -166,6 +187,7 @@ bool DBController::getDevice(const qint64& id, Device* device, QString* errorMes
                 device->setDescriptiveName(query.value(1).toString());
                 device->setProtectionSystemId(query.value(2).toInt());
             } else {
+                // Some error ocurred retrieving data from the database
                 if(nullptr != errorMessage) {
                     throw CustomException(database_->lastError().text());
                 }
@@ -188,6 +210,7 @@ bool DBController::getProtectionSystem(const qint64& id, ProtectionSystem* prote
                 throw CustomException("Database is closed");
             }
         } else {
+            // We are ok, so launch the query and get the data
             QSqlQuery query;
             ret = query.exec(QString("SELECT id, name, encryption_mode FROM %1 WHERE id == %2").arg(DB_TABLE_PROTECTION_SYSTEMS_NAME).arg(id));
             if(ret && query.next()) {
@@ -195,6 +218,7 @@ bool DBController::getProtectionSystem(const qint64& id, ProtectionSystem* prote
                 protectionSystem->setDescriptiveName(query.value(1).toString());
                 protectionSystem->setEncryptionMode(query.value(2).toString());
             } else {
+                // Some error ocurred retrieving data from the database
                 if(nullptr != errorMessage) {
                     throw CustomException(database_->lastError().text());
                 }

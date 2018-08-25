@@ -25,6 +25,8 @@ class DBController
 {
 public:
 
+    static const QString DB_CONNECTION_NAME;                //!< The kind of connection to the database.
+
     /**
      * @brief Class constructor.
      * @param database The database instance to use.
@@ -86,7 +88,6 @@ public:
 
 private:
 
-    static const QString DB_CONNECTION_NAME;                //!< The kind of connection to the database.
     static const QString DB_FILENAME;                       //!< The database fielname
     static const QString DB_USER;                           //!< The username to open the database.
     static const QString DB_PASSWORD;                       //!< The password to open the database.

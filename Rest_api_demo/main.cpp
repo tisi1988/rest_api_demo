@@ -1,3 +1,10 @@
+/**
+ * @file   main.cpp
+ * @author Rubén Sánchez Castellano
+ * @date   August 24, 2018
+ * @brief  Main file.
+ */
+
 #include "restdemoapp.h"
 #include <QCoreApplication>
 #include <QtDebug>

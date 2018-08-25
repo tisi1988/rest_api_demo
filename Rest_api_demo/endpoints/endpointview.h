@@ -6,6 +6,22 @@
  * @author Rubén Sánchez Castellano
  * @date   August 24, 2018
  * @brief  The declaration the EndpointUpdate class.
+ *  *  The API of this endpoint is:
+ *  - URL: /register
+ *  - PARAMS:
+ *      + 'id' as number
+ *  - BODY: (empty)
+ *
+ * The reponse content is:
+ * - CODE:
+ *      + 200 for OK
+ *      + 400 for ERROR
+ * - BODY:
+ *      + Error message.
+ *      + 'id' as number.
+ *      + 'protection_system_id' as number.
+ *      + 'key' as string.
+ *      + 'payload' as string.
  */
 
 #include "serverendpoint.h"

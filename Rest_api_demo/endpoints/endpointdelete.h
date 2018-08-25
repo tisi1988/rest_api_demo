@@ -6,6 +6,18 @@
  * @author Rubén Sánchez Castellano
  * @date   August 24, 2018
  * @brief  The declaration the EndpointDelete class.
+ * The API of this endpoint is:
+ *  - URL: /delete
+ *  - PARAMS:
+ *      + 'id' as number
+ *  - BODY: (empty)
+ *
+ * The reponse content is:
+ * - CODE:
+ *      + 200 for OK
+ *      + 400 for ERROR
+ * - BODY:
+ *      + Error message.
  */
 
 #include "serverendpoint.h"

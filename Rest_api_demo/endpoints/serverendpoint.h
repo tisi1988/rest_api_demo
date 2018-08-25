@@ -87,7 +87,7 @@ protected:
 
     http_listener webservice_;      //!< This is the listener which implements the webservice.
 
-    quint64 request_counter_ = 0;   //!< The counter used to assign the id the every request received.
+    quint64 request_id_ = 0;   //!< The counter used to assign the id the every request received.
 
     QMap<quint64, http_request> get_requests_;     //!< Queue used to hold the GET requests.
     QMap<quint64, http_request> delete_requests_;  //!< Queue used to hold the DEL requests.
