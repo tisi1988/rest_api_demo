@@ -4,6 +4,8 @@ QT += sql
 CONFIG += c++11 console
 CONFIG -= app_bundle
 
+include(test/gtest_dependency.pri)
+
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -30,7 +32,8 @@ HEADERS += \
     datamodel/content.h \
     qaescipher/qaesencryption.h \
     requestevents.h \
-    customexception.h
+    customexception.h \
+    test/endpointdeletetest.h
 
 SOURCES += \
         main.cpp \
@@ -46,7 +49,8 @@ SOURCES += \
     datamodel/protectionsystem.cpp \
     datamodel/content.cpp \
     requestevents.cpp \
-    qaescipher/qaesencryption.cpp
+    qaescipher/qaesencryption.cpp \
+    test/endpointdeletetest.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
