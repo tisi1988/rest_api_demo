@@ -501,8 +501,13 @@ QByteArray QAESEncryption::removePadding(const QByteArray &rawText)
         ret.remove(ret.length() - ret.at(ret.length()-1), ret.at(ret.length()-1));
         break;
     case Padding::ISO:
-        ret.truncate(ret.lastIndexOf(0x80));
+    {
+        qint32 idx = ret.lastIndexOf(0x80);
+        if(idx >= 0){
+            ret.truncate(idx);
+        }
         break;
+    }
     default:
         //do nothing
         break;
