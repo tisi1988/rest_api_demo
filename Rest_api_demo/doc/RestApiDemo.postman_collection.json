@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "b89ec336-0c8a-47a5-8485-2a064567a623",
+		"name": "RestApiDemo",
+		"description": "Collection for the Res API Demo application for Rakuten.tv.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"protection_system_id\": 1,\n\t\"key\": \"1234567890123456\",\n\t\"payload\": \"673d2d0e5bf09c2d0571173bd1381dba0d2232106701f5be6fd9e2f5911d8981b55fd7589a40a13a304e6c8e3a306537\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8088/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"register"
+					]
+				},
+				"description": "Registers new content on the DB"
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 3,\n\t\"protection_system_id\": 2,\n\t\"key\": \"1234567890123456\",\n\t\"payload\": \"673d2d0e5bf09c2d0571173bd1381dba0d2232106701f5be6fd9e2f5911d8981b55fd7589a40a13a304e6c8e3a306537\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8088/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"update"
+					]
+				},
+				"description": "Registers new content on the DB"
+			},
+			"response": []
+		},
+		{
+			"name": "Get decrypted data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8088/decryptdata?device_id=1&content_id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"decryptdata"
+					],
+					"query": [
+						{
+							"key": "device_id",
+							"value": "1"
+						},
+						{
+							"key": "content_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8088/view?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"view"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Gets the content data for a given content Id."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8088/delete?id=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				},
+				"description": "Removes one content entry from the database."
+			},
+			"response": []
+		}
+	]
+}
