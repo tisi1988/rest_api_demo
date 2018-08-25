@@ -15,6 +15,7 @@
 #include "endpoints/endpointgetdecrypdata.h"
 #include "dbcontroller.h"
 #include "requestevents.h"
+#include "qaescipher/qaesencryption.h"
 
 /**
  * @brief The RequestsManager class implements the business logic
@@ -90,6 +91,38 @@ public:
     void onGetDecryptDataRequestEvent(const quint64& requestId, const qint64& deviceId, const qint64& contentId);
 
 private:
+
+    /**
+     * @brief Checks if the Device's protection system matches the Content protection system.
+     * @param deviceId The device identifier to check.
+     * @param contentId The content identifier to check.
+     * @return true if protection system match.
+     */
+    bool validateProtectionSystem(const qint64 &deviceId, const qint64 &contentId);
+
+    /**
+     * @brief Decrypts the Content's payload.
+     * @param contentId The Content id to decrypt.
+     * @param aes_mode The AES mode to use.
+     * @param key_length The Key length.
+     * @return the plain content as a QByteArray.
+     */
+    QByteArray decryptPayload(const qint64 contentId, QAESEncryption::Mode aes_mode, QAESEncryption::Aes key_length);
+
+    /**
+     * @brief Returns the AES mode identifier for the given string.
+     * @param encryptionModeStr The AES mdoe as string (i.e.: "AES + ECB")
+     * @return the AES mode.
+     */
+    QAESEncryption::Mode getAesMode(const QString& encryptionModeStr);
+
+    /**
+     * @brief Gets the key length for AES.
+     * @param contentId The content id to decrypt.
+     * @return The key length.
+     */
+    QAESEncryption::Aes getKeyLength(const qint64 &contentId);
+
     /**
      * @brief Checks if a key size (in bits) is valid for the AES cypher.
      * @param keySize The key size in bits.
