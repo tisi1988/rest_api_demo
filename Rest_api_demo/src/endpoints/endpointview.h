@@ -48,7 +48,10 @@ public:
      * @param errorMessage The error message to send.
      */
     void respondRequest(const quint64 requestId, const Content& contentData, const QString& errorMessage);
+
 private:
+
+    friend class EndpointViewTest;
 
     /**
      * @brief This method handles a new incoming request, parses the parameters and

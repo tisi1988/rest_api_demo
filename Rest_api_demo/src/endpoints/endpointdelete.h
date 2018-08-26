@@ -45,6 +45,8 @@ public:
 
 private:
 
+    friend class EndpointDeleteTest;
+
     /**
      * @brief This method handles a new incoming request, parses the parameters and
      * notifies the control proces the request.

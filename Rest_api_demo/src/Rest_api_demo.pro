@@ -33,7 +33,13 @@ HEADERS += \
     qaescipher/qaesencryption.h \
     requestevents.h \
     customexception.h \
-    test/endpointdeletetest.h
+    test/endpointdeletetest.h \
+    test/endpointgetdecryptdatatest.h \
+    test/endpointregistertest.h \
+    test/endpointupdatetest.h \
+    test/endpointviewtest.h \
+    test/dbcontrollertest.h \
+    test/requestmanagertest.h
 
 SOURCES += \
         main.cpp \
@@ -50,7 +56,13 @@ SOURCES += \
     datamodel/content.cpp \
     requestevents.cpp \
     qaescipher/qaesencryption.cpp \
-    test/endpointdeletetest.cpp
+    test/endpointdeletetest.cpp \
+    test/endpointgetdecryptdatatest.cpp \
+    test/endpointregistertest.cpp \
+    test/endpointupdatetest.cpp \
+    test/endpointviewtest.cpp \
+    test/dbcontrollertest.cpp \
+    test/requestmanagertest.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

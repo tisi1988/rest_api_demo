@@ -34,6 +34,13 @@ public:
     DBController(QSqlDatabase* database);
 
     /**
+     * @brief Class destructor
+     */
+    ~DBController() {
+        close();
+    }
+
+    /**
      * @brief Closes the database if it is open.
      */
     void close();
@@ -87,6 +94,8 @@ public:
     bool getProtectionSystem(const qint64& id, ProtectionSystem* protectionSystem, QString* errorMessage);
 
 private:
+
+    friend class DBControllerTest;
 
     static const QString DB_FILENAME;                       //!< The database fielname
     static const QString DB_USER;                           //!< The username to open the database.

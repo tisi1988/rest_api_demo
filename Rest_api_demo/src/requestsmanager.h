@@ -92,6 +92,8 @@ public:
 
 private:
 
+    friend class RequestManagerTest;
+
     /**
      * @brief Checks if the Device's protection system matches the Content protection system.
      * @param deviceId The device identifier to check.
@@ -103,11 +105,11 @@ private:
     /**
      * @brief Decrypts the Content's payload.
      * @param contentId The Content id to decrypt.
-     * @param aes_mode The AES mode to use.
-     * @param key_length The Key length.
+     * @param aesMode The AES mode to use.
+     * @param keyLength The Key length.
      * @return the plain content as a QByteArray.
      */
-    QByteArray decryptPayload(const qint64 contentId, QAESEncryption::Mode aes_mode, QAESEncryption::Aes key_length);
+    QByteArray decryptPayload(const qint64 contentId, QAESEncryption::Mode aesMode, QAESEncryption::Aes keyLength);
 
     /**
      * @brief Returns the AES mode identifier for the given string.

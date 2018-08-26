@@ -46,7 +46,10 @@ public:
      * @param data The decrypted payload data from the Content requested.
      */
     void respondRequest(const quint64 requestId, const QString& errorMessage, const QByteArray& data);
+
 private:
+
+    friend class EndpointDecryptDataTest;
 
     /**
      * @brief This method handles a new incoming request, parses the parameters and
@@ -62,6 +65,14 @@ private:
      * @param contentId The parsed content identifier.
      */
     void parseGetDecryptDataRequestParams(const map<string, string> params, qint64* deviceId, qint64 *contentId) const;
+
+    /**
+     * @brief Builds the JSON data for a request response.
+     * @param errorMessage The error message to send.
+     * @param data The decrypted data to send.
+     * @return the given data as JSON
+     */
+    json::value buildResponseJsonData(const QString& errorMessage, const QByteArray& data) const;
 };
 
 #endif // ENDPOINTGETDECRYPDATA_H

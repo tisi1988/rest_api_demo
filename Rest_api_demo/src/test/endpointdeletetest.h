@@ -1,21 +1,21 @@
-#ifndef UNANNOUNCINGTEST_H
-#define UNANNOUNCINGTEST_H
+#ifndef ENDPOINTDELETETEST_H
+#define ENDPOINTDELETETEST_H
 
 #include <gtest/gtest.h>
+#include "../endpoints/endpointdelete.h"
 
-class EndPointDeleteTest : public ::testing::Test {
+class EndpointDeleteTest : public ::testing::Test {
 protected:
     virtual void SetUp() {
-
     }
 
     virtual void TearDown() {
     }
 
-    // attributes
-
-    // accessors
+    qint64 accessParseDeleteRequestParams(EndpointDelete* endpoint, const map<string, string>& params){
+        return endpoint->parseDeleteRequestParams(params);
+    }
 };
 
 
-#endif // UNANNOUNCINGTEST_H
+#endif // ENDPOINTDELETETEST_H

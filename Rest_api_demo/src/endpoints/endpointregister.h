@@ -50,6 +50,8 @@ public:
 
 private:
 
+    friend class EndpointRegisterTest;
+
     /**
      * @brief This method handles a new incoming request, parses the parameters and
      * notifies the control proces the request.

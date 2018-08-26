@@ -52,9 +52,7 @@ void EndpointGetDecrypData::respondRequest(const quint64 requestId, const QStrin
         if(it != put_requests_.end()) {
             http_request request = it.value();
             // Create the response with the JSON data
-            json::value response;
-            response["error"] = json::value::string(errorMessage.toStdString().c_str());
-            response["data"] = json::value::string(data.toStdString().c_str());
+            json::value response = buildResponseJsonData(errorMessage, data);
             quint16 result_code = status_codes::OK;
             if(!errorMessage.isEmpty()){
                 result_code = status_codes::BadRequest;
@@ -79,19 +77,30 @@ void EndpointGetDecrypData::parseGetDecryptDataRequestParams(const map<string, s
     if(params.size() == 2) {
         it = params.find("device_id");
         if(it != params.end()) {
-            content_id = QString::fromStdString(it->second).toInt();
+            device_id = QString::fromStdString(it->second).toInt();
         } else {
             throw CustomException("Parameter device_id not found");
         }
         it = params.find("content_id");
         if(it != params.end()) {
-            device_id = QString::fromStdString(it->second).toInt();
+            content_id = QString::fromStdString(it->second).toInt();
         } else {
-            throw CustomException("Parameter device_id not found");
+            throw CustomException("Parameter content_id not found");
         }
         *deviceId = device_id;
         *contentId = content_id;
     } else {
         throw CustomException("Invalid request param amount");
+    }
+}
+
+json::value EndpointGetDecrypData::buildResponseJsonData(const QString& errorMessage, const QByteArray& data) const {
+    try {
+        json::value json_data;
+        json_data["error"] = json::value::string(errorMessage.toStdString().c_str());
+        json_data["data"] = json::value::string(data.toStdString().c_str());
+        return json_data;
+    } catch (std::exception &e) {
+        throw CustomException(e.what());
     }
 }
