@@ -8,7 +8,7 @@ The application was implemented using the following libraries and frameworks:
   * **Google Test**: Used to implement the unit testing.
   * **QAESEncryption** class from https://github.com/bricke/Qt-AES
   
-All the libraries have been linked statically to the application so the binary is able to run wthout installing any previous software.
+This project is meant to be linked statically so the application runs without any dependency. Although, this code can be compiled using dynamic libraries.
 
 ## Repository architecture
 
