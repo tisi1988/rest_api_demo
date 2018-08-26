@@ -13,4 +13,4 @@ All the libraries have been linked statically to the application so the binary i
 ## Repository architecture
 
   * **src** folder contains the source code of the application and also the unit tests.
-  * **doc** folder contains the application documentation generated using Doxygen in both HTML and Latex PDF versions.
+  * **doc** folder contains the application documentation generated using Doxygen in both HTML and Latex PDF versions. It also contains a Postman collection with examples of usage of the application's API.
