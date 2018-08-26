@@ -1,6 +1,6 @@
-<map id="requestsmanager.h" name="requestsmanager.h">
-<area shape="rect" id="node2" href="$restdemoapp_8h.html" title="RestDemoApp class declaration. " alt="" coords="50,80,158,107"/>
-<area shape="rect" id="node5" href="$requestsmanager_8cpp.html" title="Request Manager class definition. " alt="" coords="183,80,329,107"/>
-<area shape="rect" id="node3" href="$main_8cpp.html" title="Main file. " alt="" coords="5,155,80,181"/>
-<area shape="rect" id="node4" href="$restdemoapp_8cpp.html" title="RestDemoApp class definition. " alt="" coords="104,155,227,181"/>
+<map id="/home/ruben/git/rest_api_demo/Rest_api_demo/src/requestsmanager.h" name="/home/ruben/git/rest_api_demo/Rest_api_demo/src/requestsmanager.h">
+<area shape="rect" id="node2" href="$restdemoapp_8h.html" title="RestDemoApp class declaration. " alt="" coords="107,109,287,165"/>
+<area shape="rect" id="node5" href="$requestsmanager_8cpp.html" title="Request Manager class definition. " alt="" coords="311,109,491,165"/>
+<area shape="rect" id="node3" href="$main_8cpp.html" title="Main file. " alt="" coords="5,213,185,269"/>
+<area shape="rect" id="node4" href="$restdemoapp_8cpp.html" title="RestDemoApp class definition. " alt="" coords="209,213,389,269"/>
 </map>

@@ -1,4 +1,4 @@
-<map id="requestsmanager.h" name="requestsmanager.h">
-<area shape="rect" id="node7" href="$dbcontroller_8h.html" title="Database Controller class declaration. " alt="" coords="1204,80,1304,107"/>
-<area shape="rect" id="node13" href="$requestevents_8h.html" title="Requests events declaration. These events are used by the endpoints to notify the application the req..." alt="" coords="1065,80,1179,107"/>
+<map id="/home/ruben/git/rest_api_demo/Rest_api_demo/src/requestsmanager.h" name="/home/ruben/git/rest_api_demo/Rest_api_demo/src/requestsmanager.h">
+<area shape="rect" id="node7" href="$dbcontroller_8h.html" title="Database Controller class declaration. " alt="" coords="1204,109,1304,136"/>
+<area shape="rect" id="node13" href="$requestevents_8h.html" title="Requests events declaration. These events are used by the endpoints to notify the application the req..." alt="" coords="1065,109,1179,136"/>
 </map>

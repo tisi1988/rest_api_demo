@@ -1,6 +1,6 @@
-<map id="restdemoapp.cpp" name="restdemoapp.cpp">
-<area shape="rect" id="node2" href="$restdemoapp_8h.html" title="RestDemoApp class declaration. " alt="" coords="700,80,808,107"/>
-<area shape="rect" id="node4" href="$requestsmanager_8h.html" title="Requests Manager class declaration. " alt="" coords="751,155,885,181"/>
-<area shape="rect" id="node10" href="$dbcontroller_8h.html" title="Database Controller class declaration. " alt="" coords="1204,229,1304,256"/>
-<area shape="rect" id="node16" href="$requestevents_8h.html" title="Requests events declaration. These events are used by the endpoints to notify the application the req..." alt="" coords="1065,229,1179,256"/>
+<map id="/home/ruben/git/rest_api_demo/Rest_api_demo/src/restdemoapp.cpp" name="/home/ruben/git/rest_api_demo/Rest_api_demo/src/restdemoapp.cpp">
+<area shape="rect" id="node2" href="$restdemoapp_8h.html" title="RestDemoApp class declaration. " alt="" coords="700,109,808,136"/>
+<area shape="rect" id="node4" href="$requestsmanager_8h.html" title="Requests Manager class declaration. " alt="" coords="751,184,885,211"/>
+<area shape="rect" id="node10" href="$dbcontroller_8h.html" title="Database Controller class declaration. " alt="" coords="1204,259,1304,285"/>
+<area shape="rect" id="node16" href="$requestevents_8h.html" title="Requests events declaration. These events are used by the endpoints to notify the application the req..." alt="" coords="1065,259,1179,285"/>
 </map>
